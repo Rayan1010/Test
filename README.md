@@ -1,11 +1,56 @@
-<div align="center">
+# سِجل | SIJIL - سجل الصيانة الرقمي للسيارات
+**SIJIL - Digital Vehicle Maintenance & AI Invoice Log**
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+تطبيق Production-Ready متكامل لمساعدة ملاك السيارات على إنشاء سجل صيانة رقمي موثوق لسياراتهم، إما عن طريق الإدخال اليدوي أو عن طريق رفع/تصوير فاتورة الصيانة واستخدام Gemini AI لاستخراج البنود والتكاليف تلقائياً.
 
-  <h1>Built with AI Studio</h2>
+---
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+## الميزات الرئيسية (Core Features)
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+1. **المصادقة وحماية البيانات (Firebase Auth & Security)**:
+   - تسجيل الدخول المباشر بحساب Google.
+   - دعم التصفح التجريبي كضيف مع إمكانية الترقية لحفظ البيانات في السحابة.
+   - تطبيق Firestore Security Rules (RBAC) لضمان أن كل مستخدم لا يرى ولا يعدل إلا سياراته وسجلاته الخاصة.
 
-</div>
+2. **إدارة السيارات (Vehicle Management)**:
+   - إضافة وتعديل وحذف السيارات (الشركة الصانعة، الموديل، سنة الصنع، قراءة العداد الحالية، الاسم المخصص أو رقم اللوحة).
+   - تحديث سريع لقراءة العداد بنقرة زر واحدة.
+   - تبديل سلس بين مركبات المستخدم المتعددة من الشريط العلوي.
+
+3. **سجل الصيانة الزمني (Maintenance Timeline)**:
+   - تسجيل التاريخ، قراءة العداد، نوع الصيانة (زيت وفلتر، فرامل، إطارات، بطارية، صيانة دورية، ناقل الحركة، تكييف، فحص، إلخ).
+   - توثيق قطع الغيار المستهلكة، التكلفة، اسم المركز أو الورشة، وملاحظات الفني.
+   - إرفاق صور ومستندات الفواتير مع إمكانية معاينتها بالحجم الكامل.
+
+4. **المسح الذكي للفواتير (AI Invoice Extraction with Gemini 2.5 Flash)**:
+   - تحليل الفاتورة المرفوعة واستخراج منظم لـ:
+     - `invoiceDate`
+     - `odometer`
+     - `workshopName`
+     - `services[]`
+     - `parts[]`
+     - `totalCost`
+     - `currency`
+     - `notes`
+   - المعالجة تتم **حصرياً من خلال Server-side runtime** لحماية `GEMINI_API_KEY` بالكامل من الواجهة الأمامية.
+   - عرض البيانات المستخرجة في لوحة مراجعة لتأكيدها وتعديلها قبل الاعتماد النهائي في السجل.
+
+5. **تذكيرات الصيانة (Reminders)**:
+   - إنشاء تنبيهات صيانة تستند إما إلى تاريخ استحقاق محدد أو إلى قراءة عداد مستهدفة (مثلاً بعد 5000 أو 10000 كم).
+   - حساب تلقائي للأيام والكيلومترات المتبقية، مع تمييز المواعيد المتأخرة باللون الأحمر.
+
+6. **ملف صيانة المركبة (Vehicle Service Report)**:
+   - صفحة مصممة كـ "جواز صيانة رقمي" معتمد وقابل للطباعة أو التصدير المباشر كملف PDF لمشاركته عند بيع السيارة.
+
+7. **دعم ثنائي اللغة (Bilingual RTL/LTR)**:
+   - العربية هي اللغة الأساسية (RTL).
+   - الإنجليزية (LTR) مدعومة بالكامل وبنقرة زر فورية.
+
+---
+
+## البنية التقنية (Tech Stack)
+
+- **Frontend**: React 19, TypeScript, Tailwind CSS, Lucide Icons, Motion.
+- **Backend Runtime**: Express.js (Node.js) مع Vite Middleware في التطوير وتخديم الإنتاج.
+- **Database & Auth**: Firebase Authentication & Cloud Firestore (مع نشر `firestore.rules`).
+- **AI Engine**: `@google/genai` (Gemini 2.5 Flash) مع استجابة JSON مقيدة بـ Schema دقيقة.

@@ -1,0 +1,6 @@
+{
+  "name": "سِجل | SIJIL",
+  "description": "سجل صيانة رقمي منظم للسيارات مع استخراج تلقائي لبيانات الفواتير بالذكاء الاصطناعي",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
